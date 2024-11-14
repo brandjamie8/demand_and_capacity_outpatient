@@ -72,7 +72,7 @@ def referrals_prediction_page():
     if uploaded_file:
         df = load_data(uploaded_file)
         if "date" in df.columns and "referrals" in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
+            df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y')
             df.set_index('date', inplace=True)
             monthly_data = df['referrals'].resample('M').sum()
 
