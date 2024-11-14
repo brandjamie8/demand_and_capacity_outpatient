@@ -42,7 +42,7 @@ def historic_waiting_list_page():
     if uploaded_file:
         df = load_data(uploaded_file)
         if "date" in df.columns and "referrals" in df.columns and "removals" in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
+            df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y')
             df.set_index('date', inplace=True)
             monthly_data = df.resample('M').sum()
 
@@ -106,7 +106,7 @@ def capacity_page():
     if uploaded_file:
         df = load_data(uploaded_file)
         if "date" in df.columns and "first_appointments" in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
+            df['date'] = pd.to_datetime(df['date'], format='%d/%m/%Y')
             df.set_index('date', inplace=True)
             monthly_first_appointments = df['first_appointments'].resample('M').sum()
 
